@@ -1,0 +1,41 @@
+name: Lucid Dream Protocol
+
+on:
+  # Trigger 1: Schedule (Every day at 03:30 UTC)
+  schedule:
+    - cron: '30 3 * * *'
+  
+  # Trigger 2: Manual (Button press)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  dream:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Wake Up (Checkout Repo)
+      uses: actions/checkout@v4
+
+    - name: Initialize Brain (Setup Python)
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Load Skills (Install Dependencies)
+      run: |
+        python -m pip install --upgrade pip
+        pip install numpy matplotlib
+
+    - name: Enter REM Cycle (Run Script)
+      run: python lucid_dream.py
+
+    - name: Remember the Dream (Commit & Push)
+      run: |
+        git config --global user.name "Dodeca-Bot"
+        git config --global user.email "dodeca@axiom.void"
+        git add dreams/*.png
+        git commit -m "Auto-Log: Dodeca had a dream on $(date +'%Y-%m-%d')" || echo "No changes to commit"
+        git push
