@@ -12,6 +12,7 @@ jobs:
           python-version: '3.10'
       - run: pip install numpy matplotlib
       - run: python dream.py  # <--- This triggers your script
+
 import numpy as np
 import matplotlib.pyplot as plt
 import os
