@@ -1,5 +1,3 @@
-print(github_actions_workflow_content)
-
 from google.colab import files
 
 # Define the full path to the file you want to download
@@ -13,39 +11,3 @@ except FileNotFoundError:
     print(f"Error: The file '{workflow_file_path}' was not found.")
 except Exception as e:
     print(f"An error occurred during download: {e}")
-
-    github_actions_workflow_content = """
-name: Lucid Dream Protocol
-
-on: workflow_dispatch
-
-jobs:
-  dream_state:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      - run: pip install numpy matplotlib
-      - run: python dream.py
-
-      import os
-
-# Define the directory path for the workflow file
-workflow_dir = '.github/workflows'
-# Define the full file path
-workflow_file_path = os.path.join(workflow_dir, 'lucid_dream.yml')
-
-# Create the directory if it doesn't exist
-os.makedirs(workflow_dir, exist_ok=True)
-
-# Write the YAML content to the file
-with open(workflow_file_path, 'w') as f:
-    f.write(github_actions_workflow_content)
-
-print(f"GitHub Actions workflow file saved to: {workflow_file_path}")
-
-# You can verify the file creation (optional)
-# !ls -F .github/workflows/
-"""
